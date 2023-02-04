@@ -1,9 +1,12 @@
 <?php
 
+$path_to_history_log = './history.log';
+$path_to_state_file = './state.txt';
+
 // Function to get the latest state of the data pipeline
 function getPipelineState() {
-    $stateFile = '/path/to/state/file';
-    if (file_exists($stateFile)) {
+    global $path_to_state_file;
+    if (file_exists($path_to_state_file)) {
         return file_get_contents($stateFile);
     }
     return 'Not available';
@@ -11,8 +14,8 @@ function getPipelineState() {
 
 // Function to get the latest log filename of the data pipeline
 function getLatestLogFile() {
-    $logDirectory = '/path/to/log/directory';
-    $logFiles = array_diff(scandir($logDirectory), array('.', '..'));
+    global $path_to_history_log;
+    $logFiles = array_diff(scandir($path_to_history_log), array('.', '..'));
     if (count($logFiles) > 0) {
         sort($logFiles);
         return $logFiles[count($logFiles) - 1];
@@ -20,11 +23,9 @@ function getLatestLogFile() {
     return 'Not available';
 }
 
-// Get the state and log information
 $state = getPipelineState();
 $logFile = getLatestLogFile();
 
-// Return the state and log information as a JSON object
 header('Content-Type: application/json');
 echo json_encode(array('state' => $state, 'logFile' => $logFile));
 
