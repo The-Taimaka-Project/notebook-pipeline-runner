@@ -3,7 +3,6 @@
 $path_to_history_log = './history.log';
 $path_to_state_file = './state.txt';
 
-// Function to get the latest state of the data pipeline
 function getPipelineState() {
     global $path_to_state_file;
     if (file_exists($path_to_state_file)) {
@@ -12,7 +11,6 @@ function getPipelineState() {
     return 'Not available';
 }
 
-// Function to get the latest log filename of the data pipeline
 function getLatestLogFile() {
     global $path_to_history_log;
     $logFiles = array_diff(scandir($path_to_history_log), array('.', '..'));
