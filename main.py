@@ -12,7 +12,7 @@ if(__name__ == '__main__'):
         print("Another instance of the script is already running.")
         exit()
 
-    notebooks = ['./notebooks/notebook.ipynb']
+    notebooks = ['./notebooks/notebook.ipynb', './notebooks/notebook2.ipynb']
     pipeline.run_pipeline(LOG_FILE, OUTPUT_DIR, notebooks)
 
     lock.release_lock(LOCK_FILE, lock_file_IO_wrapper)

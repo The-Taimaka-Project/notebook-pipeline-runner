@@ -9,6 +9,9 @@ from .colors import color
 
 
 def run_notebook(notebook_path: str, output_dir: str):
+    notebook_file_name = notebook_path.split('/')[-1]
+    print(color.BOLD + color.CYAN + "Running notebook: " + notebook_file_name + color.END)
+
     # Load the Jupyter Notebook
     with open(notebook_path, 'r') as f:
         nb = nbformat.read(f, as_version=4)
@@ -25,7 +28,6 @@ def run_notebook(notebook_path: str, output_dir: str):
     print(color.BOLD + "Writing notebook to output directory: " + output_dir +
           notebook_path.split('/')[-1] + ".html" + color.END)
 
-    notebook_file_name = notebook_path.split('/')[-1]
     # Write the HTML output to a file
     with open('{0}{1}.html'.format(output_dir, notebook_file_name), 'w') as f:
         f.write(html_data)
