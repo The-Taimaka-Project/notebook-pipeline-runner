@@ -4,6 +4,7 @@ from src import pipeline
 if(__name__ == '__main__'):
     LOCK_FILE = '/tmp/pipeline.lock'
     LOG_FILE = './logs/log.txt'
+    OUTPUT_DIR = './out'
 
     lock_success, lock_file_IO_wrapper = lock.obtain_lock(LOCK_FILE)
 
@@ -12,6 +13,6 @@ if(__name__ == '__main__'):
         exit()
 
     notebooks = ['./notebooks/notebook.ipynb']
-    pipeline.run_pipeline(LOG_FILE, notebooks)
+    pipeline.run_pipeline(LOG_FILE, OUTPUT_DIR, notebooks)
 
     lock.release_lock(LOCK_FILE, lock_file_IO_wrapper)
