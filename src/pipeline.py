@@ -43,6 +43,6 @@ def run_pipeline(log_file, output_dir, notebooks):
             log_result.append(notebook + " - Failed")
             print(e)
 
-    with open(log_file, 'w') as f:
+    with open(log_file, 'a') as f:
         for log in log_result:
-            f.write(log + " - " + str(datetime.now()))
+            f.write(log + " - " + str(datetime.now()) + '\n')
