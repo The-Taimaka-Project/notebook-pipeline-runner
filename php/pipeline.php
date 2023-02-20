@@ -56,7 +56,9 @@ function runNotebook($notebook) {
     return logStatus($return_code, $output);
 }
 
-function runPipeline($notebooks, $path_to_lock_file, $path_to_state_file) {
+function runPipeline($notebooks) {
+    global $path_to_history_log, $path_to_state_file, $path_to_lock_file;
+
     file_put_contents($path_to_lock_file, date('Y-m-d H:i:s'));
     file_put_contents($path_to_state_file, PipelineState::Running . date('Y-m-d H:i:s'), LOCK_EX);
 
@@ -95,15 +97,15 @@ if(file_exists($path_to_lock_file)) {
     if(posix_kill($pid, 0)) {
         respondAndExit(Result::FAILURE, 'Pipeline is already running');
     } else {
-        unlink($path_to_lock_file));
+        unlink($path_to_lock_file);
         respondAndExit(Result::FAILURE, 'Lockfile was stale, removed it. Please try again.');
     }
 }
 
 file_put_contents($path_to_lock_file, getmypid());
 
-$notebooks = array('notebook1.ipynb', 'notebook2.ipynb', 'notebook3.ipynb');
-$result = runPipeline($notebooks, $path_to_state_file);
+$notebooks = array('notebooks.ipynb');
+$result = runPipeline($notebooks);
 
 header('Content-Type: application/json');
 echo json_encode($result);
