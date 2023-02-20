@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import fcntl
 import os
 from time import sleep
