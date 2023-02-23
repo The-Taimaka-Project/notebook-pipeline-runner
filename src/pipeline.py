@@ -29,7 +29,7 @@ def run_notebook(notebook_path: str, output_dir: str):
     html_data, resources = html_exporter.from_notebook_node(nb)
 
     output_dir = output_dir + '/'
-    print_with_color("Writing notebook to output directory: ", CYAN,
+    print_with_color("Writing notebook HTML to output directory: ", CYAN,
                      bold=True,
                      childText=output_dir + notebook_path.split('/')[-1] + ".html"
                      )
@@ -42,8 +42,8 @@ def run_notebook(notebook_path: str, output_dir: str):
 def run_pipeline(log_directory, output_dir, notebooks):
     print("Running pipeline... consisting of {0} notebooks\n".format(len(notebooks)))
 
-    instance_log_directory = log_directory + '/instance_logs.log'
-    error_logs_directory = log_directory + '/error_logs.log'
+    instance_log_PATH = log_directory + '/instance_logs.log'
+    error_log_PATH = log_directory + '/error_logs.log'
 
     log_result = []
     error_log_results = []
@@ -68,19 +68,20 @@ def run_pipeline(log_directory, output_dir, notebooks):
         # new line
         print("")
 
-    _write_to_logs([(log_result, instance_log_directory), (error_log_results, error_logs_directory)])
+    _write_logs([(log_result, instance_log_PATH), (error_log_results, error_log_PATH)])
 
 
-def _write_to_logs(log: List[Tuple]):
-    def write_log_file(log_array, log_name):
-        if len(log_array) == 0:
-            return
+def _write_logs(log: List[Tuple[List[str], str]]):
+    for log_array, log_path in log:
+        _write_log_file(log_array, log_path)
 
-        print()
-        with open(log_name, 'a') as f:
-            f.write("==================================================================================\n")
-            for log in log_array:
-                f.write(log + " - " + str(datetime.now()) + '\n')
 
-    for log_array, log_name in log:
-        write_log_file(log_array, log_name)
+def _write_log_file(log_array, log_path):
+    if len(log_array) == 0:
+        return
+
+    print()
+    with open(log_path, 'a') as f:
+        f.write("==================================================================================\n")
+        for log in log_array:
+            f.write(log + " - " + str(datetime.now()) + '\n')

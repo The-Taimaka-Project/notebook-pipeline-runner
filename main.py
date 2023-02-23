@@ -38,6 +38,7 @@ if(__name__ == '__main__'):
                  './notebooks/notebook2.ipynb',
                  './notebooks/notebook4.ipynb',
                  './notebooks/notebookERROR.ipynb',
+                 './notebooks/notebook4.ipynb'
                  ]
 
     if not confirm_run(notebooks):
