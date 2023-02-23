@@ -1,6 +1,6 @@
 import fcntl
 import os
-from .colors import color
+from .colors import RED, GREEN, BOLD, END
 
 
 def obtain_lock(lock_file):
@@ -9,10 +9,10 @@ def obtain_lock(lock_file):
     try:
         fcntl.flock(lock_file, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except IOError:
-        print(color.RED + "Another instance of the script is already running." + color.END + "\n")
+        print(RED + "Another instance of the script is already running." + END + "\n")
         return False, None
 
-    print(color.GREEN + color.BOLD + "Lock acquired by pid: " + color.END + str(os.getpid()))
+    print(GREEN + BOLD + "Lock acquired by pid: " + END + str(os.getpid()) + "\n")
     return True, lock_file
 
 
@@ -22,4 +22,4 @@ def release_lock(lock_file_path, lock_file_IO_wrapper):
     lock_file_IO_wrapper.close()
     os.remove(lock_file_path)
 
-    print(color.BOLD + color.GREEN + "Lock released by pid: " + color.END + str(os.getpid()) + "\n")
+    print(BOLD + GREEN + "Lock released by pid: " + END + str(os.getpid()) + "\n")
