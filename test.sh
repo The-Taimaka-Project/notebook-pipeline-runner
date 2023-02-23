@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Run the Python script twice in the background
-python3 main.py arg1 arg2 &
-python3 main.py arg3 arg4 &
+python3 main.py &
+python3 main.py &
 
 # Wait for both instances to complete
 wait
