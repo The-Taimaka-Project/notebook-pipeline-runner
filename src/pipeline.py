@@ -1,6 +1,4 @@
 from datetime import datetime
-import fcntl
-import os
 from time import sleep
 from typing import List, Tuple
 import nbformat
@@ -42,12 +40,14 @@ def run_notebook(notebook_path: str, output_dir: str):
 
 
 def run_pipeline(log_directory, output_dir, notebooks):
-    instance_logs = log_directory + '/instance_logs.log'
-    error_logs = log_directory + '/error_logs.log'
     print("Running pipeline... consisting of {0} notebooks\n".format(len(notebooks)))
+
+    instance_log_directory = log_directory + '/instance_logs.log'
+    error_logs_directory = log_directory + '/error_logs.log'
 
     log_result = []
     error_log_results = []
+
     index = 0
     for notebook in notebooks:
         print("Running Notebook {0} of {1} ===========================".format(index + 1, len(notebooks)))
@@ -59,21 +59,24 @@ def run_pipeline(log_directory, output_dir, notebooks):
             error_log_results.append(notebook + " - Failed")
             error_log_results.append(str(e))
 
-            print_with_color("Error running notebook: ", RED, True, "Halting pipeline execution. Please check the logs.")
+            print_with_color("Error running notebook: ",
+                             RED, True,
+                             "Halting pipeline execution. Please check the logs.")
             break
 
         index += 1
         # new line
         print("")
 
-    _write_to_logs((instance_logs, instance_logs), (error_logs, error_logs))
+    _write_to_logs([(log_result, instance_log_directory), (error_log_results, error_logs_directory)])
 
 
-def _write_to_logs(log: List[Tuple, str]):
+def _write_to_logs(log: List[Tuple]):
     def write_log_file(log_array, log_name):
         if len(log_array) == 0:
             return
 
+        print()
         with open(log_name, 'a') as f:
             for log in log_array:
                 f.write(log + " - " + str(datetime.now()) + '\n')

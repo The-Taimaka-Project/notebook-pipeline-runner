@@ -1,4 +1,4 @@
-./notebooks/notebookERROR.ipynb - Failed - 2023-02-23 09:45:14.426817
+./notebooks/notebookERROR.ipynb - Failed - 2023-02-23 10:58:50.983005
 An error occurred while executing the following cell:
 ------------------
 print('hello world')
@@ -7,10 +7,26 @@ raise Exception("Random error")
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mException[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/x6/6vwwtzrs2b50t061bzf65nm40000gn/T/ipykernel_9810/257706760.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/x6/6vwwtzrs2b50t061bzf65nm40000gn/T/ipykernel_11306/257706760.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0mprint[0m[0;34m([0m[0;34m'hello world'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 2[0;31m [0;32mraise[0m [0mException[0m[0;34m([0m[0;34m"Random error"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;31mException[0m: Random error
 Exception: Random error
- - 2023-02-23 09:45:14.426821
+ - 2023-02-23 10:58:50.983016
+./notebooks/notebookERROR.ipynb - Failed - 2023-02-23 10:59:06.699859
+An error occurred while executing the following cell:
+------------------
+print('hello world')
+raise Exception("Random error")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mException[0m                                 Traceback (most recent call last)
+[0;32m/var/folders/x6/6vwwtzrs2b50t061bzf65nm40000gn/T/ipykernel_11380/257706760.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0mprint[0m[0;34m([0m[0;34m'hello world'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mraise[0m [0mException[0m[0;34m([0m[0;34m"Random error"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mException[0m: Random error
+Exception: Random error
+ - 2023-02-23 10:59:06.699862
