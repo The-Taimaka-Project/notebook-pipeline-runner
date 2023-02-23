@@ -78,6 +78,7 @@ def _write_to_logs(log: List[Tuple]):
 
         print()
         with open(log_name, 'a') as f:
+            f.write("==================================================================================\n")
             for log in log_array:
                 f.write(log + " - " + str(datetime.now()) + '\n')
 

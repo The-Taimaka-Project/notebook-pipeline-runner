@@ -36,8 +36,9 @@ if(__name__ == '__main__'):
 
     notebooks = ['./notebooks/notebook.ipynb',
                  './notebooks/notebook2.ipynb',
+                 './notebooks/notebook4.ipynb',
                  './notebooks/notebookERROR.ipynb',
-                 './notebooks/notebook4.ipynb']
+                 ]
 
     if not confirm_run(notebooks):
         print("Exiting...")
@@ -47,6 +48,6 @@ if(__name__ == '__main__'):
 
     lock.release_lock(LOCK_FILE, lock_file_IO_wrapper)
 
-    print("Pipeline finished. Check out the output directory at {0} for the results. \n Logs found at {1}"
+    print("Pipeline finished. Check out the output directory at {0} for the results.\nLogs found at {1}"
           .format(BOLD + OUTPUT_DIR + END,
                   BOLD + LOG_DIRECTORY + END))
