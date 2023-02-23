@@ -2,10 +2,11 @@ from datetime import datetime
 import fcntl
 import os
 from time import sleep
+from typing import List, Tuple
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 from nbconvert import HTMLExporter
-from .colors import CYAN, GREEN, print_with_color
+from .colors import BOLD, CYAN, END, GREEN, RED, print_with_color
 
 
 def run_notebook(notebook_path: str, output_dir: str):
@@ -40,14 +41,13 @@ def run_notebook(notebook_path: str, output_dir: str):
         f.write(html_data)
 
 
-def _write_to_log():
-    pass
-
-
-def run_pipeline(log_file, output_dir, notebooks):
+def run_pipeline(log_directory, output_dir, notebooks):
+    instance_logs = log_directory + '/instance_logs.log'
+    error_logs = log_directory + '/error_logs.log'
     print("Running pipeline... consisting of {0} notebooks\n".format(len(notebooks)))
 
     log_result = []
+    error_log_results = []
     index = 0
     for notebook in notebooks:
         print("Running Notebook {0} of {1} ===========================".format(index + 1, len(notebooks)))
@@ -56,12 +56,27 @@ def run_pipeline(log_file, output_dir, notebooks):
             log_result.append(notebook + " - Success")
         except Exception as e:
             log_result.append(notebook + " - Failed")
-            print(e)
+            error_log_results.append(notebook + " - Failed")
+            error_log_results.append(str(e))
+
+            print_with_color("Error running notebook: ", RED, True, "Halting pipeline execution. Please check the logs.")
+            break
 
         index += 1
         # new line
         print("")
 
-    with open(log_file, 'a') as f:
-        for log in log_result:
-            f.write(log + " - " + str(datetime.now()) + '\n')
+    _write_to_logs((instance_logs, instance_logs), (error_logs, error_logs))
+
+
+def _write_to_logs(log: List[Tuple, str]):
+    def write_log_file(log_array, log_name):
+        if len(log_array) == 0:
+            return
+
+        with open(log_name, 'a') as f:
+            for log in log_array:
+                f.write(log + " - " + str(datetime.now()) + '\n')
+
+    for log_array, log_name in log:
+        write_log_file(log_array, log_name)
