@@ -1,6 +1,16 @@
-# Setup
+# Notebook Pipeline Runner
 
-Type:
+## Requirements
+
+Make sure you have pip3 installed. If you don't, run
+
+`sudo apt update`
+
+and then
+
+`sudo apt-get install python3-pip`.
+
+Then, install the requirements by running
 
 `pip3 install -r requirements.txt`
 
@@ -8,15 +18,25 @@ Then type
 
 `python3 main.py`.
 
-For help, type
+### Requirements.txt
 
-`python3 main.py -h`.
+Requirements.txt is a file that contains all the dependencies for the program. Right now, it contains
+dependencies needed to run the dummy-test notebooks. Everywhere an external library is used in the notebooks,
+you must add it to requirements.txt.
+
+### To Run Without CRON
 
 Bypass the confirmation prompt by typing
 
 `python3 main.py --bypass-confirm`.
 
-## To Run as CRON JOB
+### Modifying the Pipeline
+
+To modify the pipeline, edit the `main.py` file. The `main.py` file contains the main function, which
+contains an array called `notebooks`, which contains the path to each notebook that will be run
+and in what order they will be run. Modify this array to your liking.
+
+## To Run as CRON Job
 
 In the terminal, run
 
