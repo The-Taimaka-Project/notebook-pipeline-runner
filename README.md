@@ -38,7 +38,7 @@ Bypass the confirmation prompt by typing
 ### Modifying the Pipeline
 
 To modify the pipeline, edit the `main.py` file. The `main.py` file contains the main function, which
-contains an array called `notebooks`, which contains the path to each notebook that will be run
+contains an array called `notebooks`, containing the path to each notebook that will be run
 and in what order they will be run. Modify this array to your liking.
 
 ## To Run as CRON Job
