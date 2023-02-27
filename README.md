@@ -18,11 +18,16 @@ Then type
 
 `python3 main.py`.
 
-### Requirements.txt
+### Requirements.txt * IMPORTANT *
 
 Requirements.txt is a file that contains all the dependencies for the program. Right now, it contains
 dependencies needed to run the dummy-test notebooks. Everywhere an external library is used in the notebooks,
 you must add it to requirements.txt.
+
+Make sure you add *all* libraries used in the notebooks into the requirements.txt file. If you don't,
+the program WILL cause an error mid-pipeline.
+
+When you've added, type `pip3 install -r requirements.txt` to install these dependencies into your environment.
 
 ### To Run Without CRON
 
