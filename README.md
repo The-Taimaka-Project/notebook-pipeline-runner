@@ -29,7 +29,7 @@ the program WILL cause an error mid-pipeline.
 
 When you've added, type `pip3 install -r requirements.txt` to install these dependencies into your environment.
 
-### To Run Without CRON
+### To bypass confirmation
 
 Bypass the confirmation prompt by typing
 
