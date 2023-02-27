@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Make sure you have pip3 installed. If you don't, run
+Make sure you have `pip3` and `python3` installed. If you don't, run
 
 `sudo apt update`
 
@@ -54,7 +54,9 @@ Press `i` to enter insert mode, and then add the following line to the file:
 Replace `/path/to/main.py` with the actual path to the main.py file. Then press `esc`, type
 `:wq`, and press `enter` to save and exit the file.
 
-You should be good! : D
+You should be good to go. The program will now run every day at midnight.
+If you want to modify the date/time at which it runs, you can check out [https://crontab.guru/#0_0_*_*_9](crontab.guru).
+
 
 ## Testing
 
