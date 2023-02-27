@@ -1,5 +1,9 @@
 # Notebook Pipeline Runner
 
+- Runs a pipeline of Jupyter Notebooks
+- Prevents multiple instances of the program from running concurrently
+- Log and error handling
+
 ## Requirements
 
 Make sure you have `pip3` and `python3` installed. If you don't, run
