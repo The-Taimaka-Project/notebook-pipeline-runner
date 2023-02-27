@@ -1,6 +1,8 @@
 from src import lock
 from src import pipeline
 from src.colors import BOLD, END, RED
+import os
+import argparse
 
 
 def confirm_run(notebooks):
@@ -27,11 +29,24 @@ if(__name__ == '__main__'):
     LOCK_FILE = '/tmp/pipeline.lock'
     LOG_DIRECTORY = './logs'
     OUTPUT_DIR = './out'
+    ERROR_HOLD = './out/error.txt'
+
+    parser = argparse.ArgumentParser(description="Run a pipeline of notebooks.")
+    parser.add_argument('--bypass-confirm', action='store_true', help='Bypass the confirmation prompt.')
+    args = parser.parse_args()
 
     lock_success, lock_file_IO_wrapper = lock.obtain_lock(LOCK_FILE)
 
     if not lock_success:
         print("Another instance of the script is already running.")
+        exit()
+
+    if os.path.isfile(ERROR_HOLD):
+        print(RED +
+              "There was an error the last time the pipeline was run. Please make sure the error was fixed."
+              + END)
+        print("Once the error is fixed, delete the status file found at {0} and run the pipeline again."
+              .format(ERROR_HOLD))
         exit()
 
     notebooks = ['./notebooks/notebook.ipynb',
@@ -41,11 +56,11 @@ if(__name__ == '__main__'):
                  './notebooks/notebook4.ipynb'
                  ]
 
-    if not confirm_run(notebooks):
+    if not args.bypass_confirm and not confirm_run(notebooks):
         print("Exiting...")
         exit()
 
-    pipeline.run_pipeline(LOG_DIRECTORY, OUTPUT_DIR, notebooks)
+    pipeline.run_pipeline(LOG_DIRECTORY, OUTPUT_DIR, ERROR_HOLD, notebooks)
 
     lock.release_lock(LOCK_FILE, lock_file_IO_wrapper)
 

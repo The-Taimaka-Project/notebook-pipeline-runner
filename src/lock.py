@@ -11,6 +11,10 @@ def obtain_lock(lock_file):
     except IOError:
         print(RED + "Another instance of the script is already running." + END + "\n")
         return False, None
+    except Exception as e:
+        print(RED + "An error occurred while trying to obtain the lock." + END + "\n")
+        print(e)
+        return False, None
 
     print(GREEN + BOLD + "Lock acquired by pid: " + END + str(os.getpid()) + "\n")
     return True, lock_file

@@ -39,7 +39,7 @@ def run_notebook(notebook_path: str, output_dir: str):
         f.write(html_data)
 
 
-def run_pipeline(log_directory, output_dir, notebooks):
+def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
     print("Running pipeline... consisting of {0} notebooks\n".format(len(notebooks)))
 
     instance_log_PATH = log_directory + '/instance_logs.log'
@@ -58,6 +58,8 @@ def run_pipeline(log_directory, output_dir, notebooks):
             log_result.append(notebook + " - Failed")
             error_log_results.append(notebook + " - Failed")
             error_log_results.append(str(e))
+
+            _create_file(error_hold_path)
 
             print_with_color("Error running notebook: ",
                              RED, True,
@@ -85,3 +87,7 @@ def _write_log_file(log_array, log_path):
         f.write("==================================================================================\n")
         for log in log_array:
             f.write(log + " - " + str(datetime.now()) + '\n')
+
+def _create_file(path):
+    with open(path, 'w') as f:
+        f.write("")
