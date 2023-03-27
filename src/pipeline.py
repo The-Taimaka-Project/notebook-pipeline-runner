@@ -55,15 +55,19 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
             run_notebook(notebook, output_dir)
             log_result.append(notebook + " - Success")
         except Exception as e:
+            error_message = str(e)
+
             log_result.append(notebook + " - Failed")
             error_log_results.append(notebook + " - Failed")
-            error_log_results.append(str(e))
+            error_log_results.append(error_message)
 
             _create_file(error_hold_path)
 
             print_with_color("Error running notebook: ",
                              RED, True,
                              "Halting pipeline execution. Please check the logs.")
+
+            send_email(error_message)
             break
 
         index += 1
