@@ -13,6 +13,9 @@ def send_email(subject, message_body):
     from_email = os.environ.get('SENDGRID_FROM_EMAIL')
     to_email = os.environ.get('SENDGRID_TO_EMAIL')
 
+    if not from_email or not to_email:
+        raise Exception("SENDGRID_FROM_EMAIL or SENDGRID_TO_EMAIL is not set")
+
     # print from_email
     print(to_email)
     print(from_email)
