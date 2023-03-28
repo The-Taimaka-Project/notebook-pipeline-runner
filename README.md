@@ -3,6 +3,7 @@
 - Runs a pipeline of Jupyter Notebooks
 - Prevents multiple instances of the program from running concurrently
 - Log and error handling
+- Emails the user when the pipeline is complete or if an error occurs
 
 ## Requirements
 
@@ -32,6 +33,13 @@ Make sure you add *all* libraries used in the notebooks into the requirements.tx
 the program WILL cause an error mid-pipeline.
 
 When you've added, type `pip3 install -r requirements.txt` to install these dependencies into your environment.
+
+### To Run.
+
+1. Make sure you have the requirements installed.
+2. Go to SendGrid.com and create an account.
+. Rename the file `test.env` to `.env`.
+3. Fill out the `.env`, replacing `SENDGRID_FROM_EMAIL` and `SENDGRID_TO_EMAIL`.
 
 ### To bypass confirmation
 

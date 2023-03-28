@@ -2,3 +2,5 @@ numpy
 matplotlib
 pandas
 folium
+sendgrid
+python-dotenv

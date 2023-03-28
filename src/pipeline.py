@@ -5,6 +5,7 @@ import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 from nbconvert import HTMLExporter
 from .colors import BOLD, CYAN, END, GREEN, RED, print_with_color
+from .email import send_email
 
 
 def run_notebook(notebook_path: str, output_dir: str):
@@ -47,6 +48,7 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
 
     log_result = []
     error_log_results = []
+    error_ocurred = False
 
     index = 0
     for notebook in notebooks:
@@ -55,6 +57,7 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
             run_notebook(notebook, output_dir)
             log_result.append(notebook + " - Success")
         except Exception as e:
+            error_ocurred = True
             error_message = str(e)
 
             log_result.append(notebook + " - Failed")
@@ -67,7 +70,8 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
                              RED, True,
                              "Halting pipeline execution. Please check the logs.")
 
-            send_email(error_message)
+            send_email("ERROR RUNNING PIPELINE",
+                       "<strong>Error running notebook</strong>")
             break
 
         index += 1
@@ -75,6 +79,9 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
         print("")
 
     _write_logs([(log_result, instance_log_PATH), (error_log_results, error_log_PATH)])
+
+    if not error_ocurred:
+        send_email("PIPELINE EXECUTION SUCCESSFUL", "<strong>Pipeline execution successful</strong>")
 
 
 def _write_logs(log: List[Tuple[List[str], str]]):
@@ -91,6 +98,7 @@ def _write_log_file(log_array, log_path):
         f.write("==================================================================================\n")
         for log in log_array:
             f.write(log + " - " + str(datetime.now()) + '\n')
+
 
 def _create_file(path):
     with open(path, 'w') as f:
