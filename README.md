@@ -81,6 +81,15 @@ To modify the pipeline, edit the `main.py` file. The `main.py` file contains the
 contains an array called `notebooks`, containing the path to each notebook that will be run
 and in what order they will be run. Modify this array to your liking.
 
+```python
+notebooks = ['./notebooks/notebook.ipynb',
+             './notebooks/notebook2.ipynb',
+             './notebooks/notebook4.ipynb',
+             './notebooks/notebookERROR.ipynb',
+             './notebooks/notebook4.ipynb'
+             ]
+```
+
 ## To Run as CRON Job
 
 In the terminal, run
