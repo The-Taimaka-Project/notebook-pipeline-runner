@@ -1,8 +1,13 @@
+import src.email as email
 from src import lock
 from src import pipeline
 from src.colors import BOLD, END, RED
 import os
 import argparse
+import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def confirm_run(notebooks):
@@ -30,6 +35,9 @@ if(__name__ == '__main__'):
     LOG_DIRECTORY = './logs'
     OUTPUT_DIR = './out'
     ERROR_HOLD = './out/error.txt'
+
+    email.send_email('PIPELINE IS INITIATING',
+                     '<strong>Pipeline began running at %s</strong>' % datetime.datetime.now())
 
     parser = argparse.ArgumentParser(description="Run a pipeline of notebooks.")
     parser.add_argument('--bypass-confirm', action='store_true', help='Bypass the confirmation prompt.')
