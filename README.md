@@ -5,6 +5,7 @@
 - Log and error handling
 - Emails the user when the pipeline is complete or if an error occurs
 
+
 ## Requirements
 
 Make sure you have `pip3` and `python3` installed. If you don't, run
@@ -34,10 +35,28 @@ the program WILL cause an error mid-pipeline.
 
 When you've added, type `pip3 install -r requirements.txt` to install these dependencies into your environment.
 
-### To Run.
+## Setup
 
-1. Make sure you have the requirements installed.
-2. Go to SendGrid.com and create an account.
+1. Make sure you have the requirements installed via `pip3 install -r requirements.txt`. (also make sure you have Python3)
+
+2. Go to SendGrid.com and create an account. You're going to have to create a [verified sender](https://docs.sendgrid.com/ui/sending-email/sender-verification) and verify the email you wish to send an email from. This is the first thing you do before your account is created.
+
+3. When you create your account, you should see a dashboard.
+
+<img width="1235" alt="image" src="https://user-images.githubusercontent.com/7038712/228095670-e3173df4-0f10-4989-a7b1-fad11e9bb3e0.png">
+
+4. On the right, there is a "Settings" button. Click on that.
+
+5. Click on `API KEYS`.
+
+6. On the top right, click `Create API Key`.
+
+7. Set the API Key Permissions to `Restricted Access`, and then give the API Key permission for "Mail Send".
+
+<img width="854" alt="image" src="https://user-images.githubusercontent.com/7038712/228096711-08a03b5f-6ee9-47d3-b4be-e7ddccc17ffc.png">
+
+7. Set the API Key Permissions to `Restricted Access`, and then give the API Key permission for "Mail Send".
+
 . Rename the file `test.env` to `.env`.
 3. Fill out the `.env`, replacing `SENDGRID_FROM_EMAIL` and `SENDGRID_TO_EMAIL`.
 
