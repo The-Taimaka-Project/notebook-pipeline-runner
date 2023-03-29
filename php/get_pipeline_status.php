@@ -2,33 +2,59 @@
 
 header('Content-Type: application/json');
 
-function readLastNonBlankLine($file) {
-    $awkCommand = "awk 'NF{non_blank_line=$0}END{print non_blank_line}' " . escapeshellarg($file);
-    $lastNonBlankLine = shell_exec($awkCommand);
-
-    return $lastNonBlankLine;
+function lineOnlyContainsEqualSigns($line) {
+    return preg_match('/^=+$/', trim($line));
 }
 
-function parseLine($line) {
-    $filename = '';
-    $failed = false;
-
-    if (preg_match('/([^\/]+\.ipynb)/', $line, $matches)) {
-        $filename = $matches[1];
+function readLastSection($file) {
+    $fp = fopen($file, 'r');
+    if (!$fp) {
+        return false;
     }
 
-    if (strpos($line, 'Failed') !== false) {
-        $failed = true;
+    $buffer = '';
+    $section = '';
+    fseek($fp, 0, SEEK_END);
+    $pos = -1;
+
+    while (fseek($fp, $pos, SEEK_END) !== -1) {
+        $char = fgetc($fp);
+        $buffer = $char . $buffer;
+        if ($char === "\n") {
+            if (lineOnlyContainsEqualSigns($buffer)) {
+                break;
+            }
+            $section = $buffer . $section;
+            $buffer = '';
+        }
+        $pos--;
     }
 
-    return ['filename' => $filename, 'failed' => $failed];
+    fclose($fp);
+    return $section;
+}
+
+function parseLines($lines) {
+    $parsedLines = [];
+
+    foreach (explode("\n", trim($lines)) as $line) {
+        if (preg_match('/([^\/]+\.ipynb) - (Success|Failed) - (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+)/', $line, $matches)) {
+            $parsedLines[] = [
+                'name' => $matches[1],
+                'status' => $matches[2] . ' at ' . $matches[3],
+            ];
+        }
+    }
+
+    return $parsedLines;
 }
 
 $logFile = '../logs/instance_logs.log';
-$lastNonBlankLine = readLastNonBlankLine($logFile);
-if ($lastNonBlankLine !== false) {
-    $result = parseLine($lastNonBlankLine);
-    echo json_encode(['status' => 'success', 'result' => $result]);
+$lastSection = readLastSection($logFile);
+if ($lastSection !== false) {
+    $pipeline = parseLines($lastSection);
+    $overallStatus = count($pipeline) > 0 && strpos($pipeline[0]['status'], 'Failed') === false ? 'Success' : 'Failure';
+    echo json_encode(['status' => $overallStatus, 'pipeline' => $pipeline, 'count' => count($pipeline)]);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Unable to read the log file.']);
 }
