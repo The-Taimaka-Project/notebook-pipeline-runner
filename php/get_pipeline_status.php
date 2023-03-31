@@ -40,8 +40,9 @@ function parseLines($lines) {
     foreach (explode("\n", trim($lines)) as $line) {
         if (preg_match('/([^\/]+\.ipynb) - (Success|Failed) - (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+)/', $line, $matches)) {
             $parsedLines[] = [
-                'name' => $matches[1],
-                'status' => $matches[2] . ' at ' . $matches[3],
+                'filename' => $matches[1],
+                'status' => $matches[2],
+                'timestamp' => $matches[3],
             ];
         }
     }
@@ -54,7 +55,7 @@ $lastSection = readLastSection($logFile);
 if ($lastSection !== false) {
     $pipeline = parseLines($lastSection);
     $overallStatus = count($pipeline) > 0 && strpos($pipeline[0]['status'], 'Failed') === false ? 'Success' : 'Failure';
-    echo json_encode(['status' => $overallStatus, 'pipeline' => $pipeline, 'count' => count($pipeline)]);
+    echo json_encode(['status' => $overallStatus, 'pipeline' => $pipeline]);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Unable to read the log file.']);
 }
