@@ -81,7 +81,7 @@ Bypass the confirmation prompt by typing
 the pipeline, type `python3 -m pip freeze > requirements.txt`. This will create a requirements.txt
 which contains all the dependencies needed to run the pipeline normally.
 
-2. Then, copy and replace the requirements.txt file in the project directory with the one you just created.a
+2. Then, copy and replace the requirements.txt file in the project directory with the one you just created.
 
 3. Run `pip3 -m install -r requirements.txt` to install the dependencies into your environment.
 
