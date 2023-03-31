@@ -37,6 +37,13 @@ When you've added, type `pip3 install -r requirements.txt` to install these depe
 
 ## Setup
 
+On the server (DigitalOcean, etc.) that you want to run the pipeline on,
+type the command
+```bash
+git clone git@github.com:kevinmonisit/notebook-pipeline-runner.git
+cd notebook-pipeline-runner
+```
+
 1. Make sure you have the requirements installed via `pip3 install -r requirements.txt`. (also make sure you have Python3)
 
 2. Go to [SendGrid.com](https://sendgrid.com/) and create an account. At the beginning of account regisration, you're going to have to create a [verified sender](https://docs.sendgrid.com/ui/sending-email/sender-verification) and verify the email you wish to send an email from. This is the first thing you do before your account is created. Set the Sender Email to any email you wish to send alerts from. (Note: You cannot send emails to yourself with SendGrid.com)
@@ -77,13 +84,18 @@ Bypass the confirmation prompt by typing
 
 ### Modifying the Pipeline
 
+The process:
+```bash
+[ your personal computer ] -- [transferring requirements.txt and notebooks] --> [ server ]
+```
+
 1. Before you run the pipeline, from the environment (personal computer, etc.) that you usually run
 the pipeline, type `python3 -m pip freeze > requirements.txt`. This will create a requirements.txt
 which contains all the dependencies needed to run the pipeline normally.
 
-2. Then, copy and replace the requirements.txt file in the project directory with the one you just created.
+2. Then, replace the `requirements.txt` file in the project directory with the one you just created.
 
-3. Run `pip3 -m install -r requirements.txt` to install the dependencies into your environment.
+3. Run `pip3 -m install -r requirements.txt` to install the dependencies into your environment (assuming this is the server).
 
 4. Type `python3 main.py --bypass-confirm` to run the dummy pipeline to make sure everything works. Now, it's time to modify the pipeline to your liking
 now that we've verified that the pipeline works.
