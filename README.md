@@ -77,7 +77,18 @@ Bypass the confirmation prompt by typing
 
 ### Modifying the Pipeline
 
-To modify the pipeline, edit the `main.py` file. The `main.py` file contains the main function, which
+1. Before you run the pipeline, from the environment (personal computer, etc.) that you usually run
+the pipeline, type `python3 -m pip freeze > requirements.txt`. This will create a requirements.txt
+which contains all the dependencies needed to run the pipeline normally.
+
+2. Then, copy and replace the requirements.txt file in the project directory with the one you just created.a
+
+3. Run `pip3 -m install -r requirements.txt` to install the dependencies into your environment.
+
+4. Type `python3 main.py --bypass-confirm` to run the dummy pipeline to make sure everything works. Now, it's time to modify the pipeline to your liking
+now that we've verified that the pipeline works.
+
+5. To modify the pipeline, edit the `main.py` file. The `main.py` file contains the main function, which
 contains an array called `notebooks`, containing the path to each notebook that will be run
 and in what order they will be run. Modify this array to your liking.
 
