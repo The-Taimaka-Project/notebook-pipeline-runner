@@ -4,3 +4,5 @@ pandas
 folium
 sendgrid
 python-dotenv
+pyodk
+sqlalchemy
