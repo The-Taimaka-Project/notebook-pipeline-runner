@@ -6,3 +6,5 @@ sendgrid
 python-dotenv
 pyodk
 sqlalchemy
+nbformat
+nbconvert

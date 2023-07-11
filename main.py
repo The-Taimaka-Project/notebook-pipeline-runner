@@ -57,11 +57,10 @@ if(__name__ == '__main__'):
               .format(ERROR_HOLD))
         exit()
 
-    notebooks = ['./notebooks/notebook.ipynb',
-                 './notebooks/notebook2.ipynb',
-                 './notebooks/notebook4.ipynb',
-                 './notebooks/notebookERROR.ipynb',
-                 './notebooks/notebook4.ipynb'
+    notebooks = ['./notebooks/admit_updater.ipynb',
+                 './notebooks/weekly_updater.ipynb',
+                 './notebooks/current_crawler.ipynb',
+                 './notebooks/attachment_updater.ipynb'
                  ]
 
     if not args.bypass_confirm and not confirm_run(notebooks):
