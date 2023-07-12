@@ -6,6 +6,8 @@ from nbconvert.preprocessors import ExecutePreprocessor
 from nbconvert import HTMLExporter
 from .colors import BOLD, CYAN, END, GREEN, RED, print_with_color
 from .email import send_email
+import traceback
+import os
 
 
 def run_notebook(notebook_path: str, output_dir: str):
@@ -18,7 +20,7 @@ def run_notebook(notebook_path: str, output_dir: str):
 
     # Execute the Jupyter Notebook
     ep = ExecutePreprocessor(timeout=600, kernel_name='python3')
-    ep.preprocess(nb, {'metadata': {'path': '.'}})
+    ep.preprocess(nb, {'metadata': {'path': os.getcwd()+'/notebooks/'}})
 
     print_with_color("Notebook execution finished: ",
                      GREEN,
@@ -60,11 +62,15 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
             error_ocurred = True
             error_message = str(e)
 
+            #For debugging
+            #print(traceback.format_exc())
+
             log_result.append(notebook + " - Failed")
             error_log_results.append(notebook + " - Failed")
             error_log_results.append(error_message)
+            #error_log_results.append(traceback.format_exc())
 
-            _create_file(error_hold_path)
+            #_create_file(error_hold_path)
 
             print_with_color("Error running notebook: ",
                              RED, True,
