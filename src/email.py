@@ -31,7 +31,7 @@ def send_email(subject, message_body):
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
         print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        #print(response.body)
+        #print(response.headers)
     except Exception as e:
         print(e.message)
