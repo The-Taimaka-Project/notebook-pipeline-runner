@@ -76,6 +76,8 @@ cd notebook-pipeline-runner
 
 Note: SendGrid API allows for 100 free emails per day.
 
+14. Create directories for ./out and ./logs
+
 ### To bypass confirmation
 
 Bypass the confirmation prompt by typing
