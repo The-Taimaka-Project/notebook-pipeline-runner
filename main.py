@@ -31,10 +31,12 @@ def confirm_run(notebooks):
 
 
 if(__name__ == '__main__'):
+    main_path = os.path.dirname(os.path.abspath(__file__)) #path to main.py being run
+
     LOCK_FILE = '/tmp/pipeline.lock'
-    LOG_DIRECTORY = './logs'
-    OUTPUT_DIR = './out'
-    ERROR_HOLD = './out/error.txt'
+    LOG_DIRECTORY = main_path+'/logs'
+    OUTPUT_DIR = main_path+'/out'
+    ERROR_HOLD = main_path+'/out/error.txt'
 
     email.send_email('PIPELINE IS INITIATING',
                      '<strong>Pipeline began running at %s</strong>' % datetime.datetime.now())
@@ -57,17 +59,18 @@ if(__name__ == '__main__'):
               .format(ERROR_HOLD))
         exit()
 
-    notebooks = ['./notebooks/admit_updater.ipynb',
-                 './notebooks/weekly_updater.ipynb',
-                 './notebooks/current_crawler.ipynb',
-                 './notebooks/attachment_updater.ipynb'
-                 ]
+    notebooks = ['/notebooks/admit_updater.ipynb',
+                 '/notebooks/weekly_updater.ipynb',
+                 '/notebooks/current_crawler.ipynb',
+                 '/notebooks/attachment_updater.ipynb'
+                 ] #use relative paths from main.py here, with no leading .
+    notebooks = [main_path + i for i in notebooks]
 
     if not args.bypass_confirm and not confirm_run(notebooks):
         print("Exiting...")
         exit()
 
-    pipeline.run_pipeline(LOG_DIRECTORY, OUTPUT_DIR, ERROR_HOLD, notebooks)
+    pipeline.run_pipeline(LOG_DIRECTORY, OUTPUT_DIR, ERROR_HOLD, notebooks, main_path+"/notebooks/")
 
     lock.release_lock(LOCK_FILE, lock_file_IO_wrapper)
 

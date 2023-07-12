@@ -7,10 +7,9 @@ from nbconvert import HTMLExporter
 from .colors import BOLD, CYAN, END, GREEN, RED, print_with_color
 from .email import send_email
 import traceback
-import os
 
 
-def run_notebook(notebook_path: str, output_dir: str):
+def run_notebook(notebook_path: str, output_dir: str, notebook_context_path: str):
     notebook_file_name = notebook_path.split('/')[-1]
     print_with_color("Running notebook: ", CYAN, True, notebook_file_name)
 
@@ -20,7 +19,7 @@ def run_notebook(notebook_path: str, output_dir: str):
 
     # Execute the Jupyter Notebook
     ep = ExecutePreprocessor(timeout=600, kernel_name='python3')
-    ep.preprocess(nb, {'metadata': {'path': os.getcwd()+'/notebooks/'}})
+    ep.preprocess(nb, {'metadata': {'path': notebook_context_path}})
 
     print_with_color("Notebook execution finished: ",
                      GREEN,
@@ -42,7 +41,7 @@ def run_notebook(notebook_path: str, output_dir: str):
         f.write(html_data)
 
 
-def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
+def run_pipeline(log_directory, output_dir, error_hold_path, notebooks, notebooks_context_path):
     print("Running pipeline... consisting of {0} notebooks\n".format(len(notebooks)))
 
     instance_log_PATH = log_directory + '/instance_logs.log'
@@ -56,7 +55,7 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks):
     for notebook in notebooks:
         print("Running Notebook {0} of {1} ===========================".format(index + 1, len(notebooks)))
         try:
-            run_notebook(notebook, output_dir)
+            run_notebook(notebook, output_dir, notebooks_context_path)
             log_result.append(notebook + " - Success")
         except Exception as e:
             error_ocurred = True
