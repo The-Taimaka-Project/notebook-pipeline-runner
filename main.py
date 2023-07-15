@@ -61,6 +61,7 @@ if(__name__ == '__main__'):
 
     notebooks = ['/notebooks/admit_updater.ipynb',
                  '/notebooks/weekly_updater.ipynb',
+                 '/notebooks/itp_discharge_updater.ipynb',
                  '/notebooks/current_crawler.ipynb',
                  '/notebooks/attachment_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
