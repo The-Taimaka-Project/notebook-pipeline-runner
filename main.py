@@ -59,15 +59,15 @@ if(__name__ == '__main__'):
               .format(ERROR_HOLD))
         exit()
 
-    notebooks = [#'/notebooks/admit_updater.ipynb',
-                 #'/notebooks/weekly_updater.ipynb',
-                 #'/notebooks/itp_arrival_updater.ipynb',
-                 #'/notebooks/itp_discharge_updater.ipynb',
-                #'/notebooks/biometrics_updater.ipynb',
-                #'/notebooks/mmh_updater.ipynb',
-                 #'/notebooks/current_crawler.ipynb',
+    notebooks = ['/notebooks/admit_updater.ipynb',
+                 '/notebooks/weekly_updater.ipynb',
+                 '/notebooks/itp_arrival_updater.ipynb',
+                 '/notebooks/itp_discharge_updater.ipynb',
+                '/notebooks/biometrics_updater.ipynb',
+                '/notebooks/mmh_updater.ipynb',
+                 '/notebooks/current_crawler.ipynb',
                  '/notebooks/relapse_study_updater.ipynb',
-                 #'/notebooks/attachment_updater.ipynb'
+                 '/notebooks/attachment_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
     notebooks = [main_path + i for i in notebooks]
 
