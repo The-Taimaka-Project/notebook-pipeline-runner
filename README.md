@@ -8,21 +8,9 @@
 
 ## Requirements
 
-Make sure you have `pip3` and `python3` installed. If you don't, run
+Requires python version 3.12 or greater. Recommend you create a virtual environment using python -m venv while running python 3.12. Any cronjobs you create should point to this venv python version (found at ./[venv name]/bin/python
 
-`sudo apt update`
-
-and then
-
-`sudo apt-get install python3-pip`.
-
-Then, install the requirements by running
-
-`pip3 install -r requirements.txt`
-
-Then type
-
-`python3 main.py`.
+You will then also need to create a kernel snapshot for jupyter using this python version. Have the virtual environment active and run python -m ipykernel install --user --name [your name here]. By default, is jupyter3.12, but you can customize it as long as you also change the kernel name parameter in one of the functions in src/pipeline.py.
 
 ### Requirements.txt * IMPORTANT *
 
