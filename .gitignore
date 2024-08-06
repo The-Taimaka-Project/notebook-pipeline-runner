@@ -4,3 +4,5 @@ out/
 sendgrid.env
 */**/__pycache__/
 .env
+pipeline_venv/
+using_venv.txt
