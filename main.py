@@ -67,6 +67,7 @@ if(__name__ == '__main__'):
                 '/notebooks/mmh_updater.ipynb',
                  '/notebooks/current_crawler.ipynb',
                  '/notebooks/relapse_study_updater.ipynb',
+                 '/notebooks/cc-relapse_updater.ipynb',
                  '/notebooks/attachment_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
     notebooks = [main_path + i for i in notebooks]
