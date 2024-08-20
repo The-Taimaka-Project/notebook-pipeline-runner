@@ -43,6 +43,7 @@ if(__name__ == '__main__'):
 
     parser = argparse.ArgumentParser(description="Run a pipeline of notebooks.")
     parser.add_argument('--bypass-confirm', action='store_true', help='Bypass the confirmation prompt.')
+    parser.add_argument('--short-run', action='store_true', help='Run only the minimum required notebooks to update data collector assignments.')
     args = parser.parse_args()
 
     lock_success, lock_file_IO_wrapper = lock.obtain_lock(LOCK_FILE)
@@ -59,7 +60,7 @@ if(__name__ == '__main__'):
               .format(ERROR_HOLD))
         exit()
 
-    notebooks = ['/notebooks/admit_updater.ipynb',
+    all_notebooks = ['/notebooks/admit_updater.ipynb',
                  '/notebooks/weekly_updater.ipynb',
                  '/notebooks/itp_arrival_updater.ipynb',
                  '/notebooks/itp_discharge_updater.ipynb',
@@ -70,7 +71,14 @@ if(__name__ == '__main__'):
                  '/notebooks/cc-relapse_updater.ipynb',
                  '/notebooks/attachment_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
-    notebooks = [main_path + i for i in notebooks]
+    min_relapse_notebooks = [
+         '/notebooks/cc-relapse_updater.ipynb',
+         '/notebooks/attachment_updater.ipynb'
+    ]
+    if args.short_run:
+        notebooks = [main_path + i for i in min_relapse_notebooks]
+    else:
+        notebooks = [main_path + i for i in all_notebooks]
 
     if not args.bypass_confirm and not confirm_run(notebooks):
         print("Exiting...")
