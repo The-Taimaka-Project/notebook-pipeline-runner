@@ -62,18 +62,19 @@ if(__name__ == '__main__'):
 
     all_notebooks = ['/notebooks/01_admit_updater.ipynb',
                  '/notebooks/02_weekly_updater.ipynb',
-                 '/notebooks/03_itp_arrival_updater.ipynb',
-                 '/notebooks/04_itp_discharge_updater.ipynb',
-                '/notebooks/05_biometrics_updater.ipynb',
-                '/notebooks/06_mmh_updater.ipynb',
-                 '/notebooks/07_current_crawler.ipynb',
-                 '/notebooks/08_relapse_study_updater.ipynb',
-                 '/notebooks/09_cc-relapse_updater.ipynb',
-                 '/notebooks/10_attachment_updater.ipynb'
+                 '/notebooks/03_photo_matching_updater.ipynb',
+                 '/notebooks/04_itp_arrival_updater.ipynb',
+                 '/notebooks/05_itp_discharge_updater.ipynb',
+                '/notebooks/06_biometrics_updater.ipynb',
+                '/notebooks/07_mmh_updater.ipynb',
+                 '/notebooks/08_current_crawler.ipynb',
+                 '/notebooks/09_relapse_study_updater.ipynb',
+                 '/notebooks/10_cc-relapse_updater.ipynb',
+                 '/notebooks/11_attachment_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
     min_relapse_notebooks = [
-         '/notebooks/09_cc-relapse_updater.ipynb',
-         '/notebooks/10_attachment_updater.ipynb'
+         '/notebooks/10_cc-relapse_updater.ipynb',
+         '/notebooks/11_attachment_updater.ipynb'
     ]
     if args.short_run:
         notebooks = [main_path + i for i in min_relapse_notebooks]
