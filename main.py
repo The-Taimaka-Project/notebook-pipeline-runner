@@ -69,12 +69,10 @@ if(__name__ == '__main__'):
                 '/notebooks/07_mmh_updater.ipynb',
                  '/notebooks/08_current_crawler.ipynb',
                  '/notebooks/09_relapse_study_updater.ipynb',
-                 '/notebooks/10_cc-relapse_updater.ipynb',
-                 '/notebooks/11_attachment_updater.ipynb'
+                 '/notebooks/10_attachment_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
     min_relapse_notebooks = [
-         '/notebooks/10_cc-relapse_updater.ipynb',
-         '/notebooks/11_attachment_updater.ipynb'
+         '/notebooks/10_attachment_updater.ipynb'
     ]
     if args.short_run:
         notebooks = [main_path + i for i in min_relapse_notebooks]
