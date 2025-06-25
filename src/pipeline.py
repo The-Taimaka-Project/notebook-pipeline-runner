@@ -18,7 +18,7 @@ def run_notebook(notebook_path: str, output_dir: str, notebook_context_path: str
         nb = nbformat.read(f, as_version=4)
 
     # Execute the Jupyter Notebook
-    ep = ExecutePreprocessor(timeout=600, kernel_name='jupyter3.12')
+    ep = ExecutePreprocessor(timeout=600, kernel_name='python3.12_localpyodk')
     ep.preprocess(nb, {'metadata': {'path': notebook_context_path}})
 
     print_with_color("Notebook execution finished: ",
