@@ -2,9 +2,9 @@ numpy
 matplotlib
 pandas
 folium
-sendgrid
 python-dotenv
 pyodk
 sqlalchemy
 nbformat
 nbconvert
+resend

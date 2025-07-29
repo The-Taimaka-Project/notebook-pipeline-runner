@@ -34,35 +34,19 @@ cd notebook-pipeline-runner
 
 1. Make sure you have the requirements installed via `pip3 install -r requirements.txt`. (also make sure you have Python3)
 
-2. Go to [SendGrid.com](https://sendgrid.com/) and create an account. At the beginning of account regisration, you're going to have to create a [verified sender](https://docs.sendgrid.com/ui/sending-email/sender-verification) and verify the email you wish to send an email from. This is the first thing you do before your account is created. Set the Sender Email to any email you wish to send alerts from. (Note: You cannot send emails to yourself with SendGrid.com)
+2. The mail provider we use is Resend. Create an account, verify domain, and get an API key. 
 
-3. When you create your account, you should see a dashboard.
-
-<img width="1235" alt="image" src="https://user-images.githubusercontent.com/7038712/228095670-e3173df4-0f10-4989-a7b1-fad11e9bb3e0.png">
-
-4. On the right, there is a "Settings" button. Click on that.
-
-5. Click on `API KEYS`.
-
-6. On the top right, click `Create API Key`.
-
-7. Set the API Key Permissions to `Restricted Access`, and then give the API Key permission for "Mail Send".
-
-<img width="854" alt="image" src="https://user-images.githubusercontent.com/7038712/228096711-08a03b5f-6ee9-47d3-b4be-e7ddccc17ffc.png">
-
-8. Make sure to copy the API key
-
-9. Go to the file `test.env` and set the `SENDGRID_API_KEY=` to `'<API KEY>'`. Make sure the single quotations are there if they aren't already.
+9. Go to the file `test.env` and set the `RESEND_API_KEY=` to `'<API KEY>'`. Make sure the single quotations are there if they aren't already.
 
 10. Rename the file `test.env` to `.env`.
 
-11. Fill out the `.env`, replacing `SENDGRID_FROM_EMAIL` and `SENDGRID_TO_EMAIL` with the emails you choose. `SENDGRID_FROM_EMAIL` should be the email you set up your SendGrid.com account with to send emaisl.
+11. Fill out the `.env`, replacing `RESEND_FROM_EMAIL` and `RESEND_TO_EMAIL` with the emails you choose. `RESEND_FROM_EMAIL` should be from the domain you verified in Resend.
 
 12. After setting the `.env` file, you can now run command `python3 main.py` from the directory of the project.
 
-13. An email will be sent to `SENDGRID_TO_EMAIL` stating that pipeline initialization has started.
+13. An email will be sent to `RESEND_TO_EMAIL` stating that pipeline initialization has started.
 
-Note: SendGrid API allows for 100 free emails per day.
+Note: Rersend API allows for 100 free emails per day.
 
 14. Create directories for ./out and ./logs
 
