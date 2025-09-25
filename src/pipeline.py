@@ -7,6 +7,13 @@ from nbconvert import HTMLExporter
 from .colors import BOLD, CYAN, END, GREEN, RED, print_with_color
 from .email import send_email
 import traceback
+import re
+
+ANSI_ESCAPE = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+
+def strip_ansi(text: str) -> str:
+    """Helper function to remove ANSI escape sequences from text (colors, control chars)."""
+    return ANSI_ESCAPE.sub('', text)
 
 
 def run_notebook(notebook_path: str, output_dir: str, notebook_context_path: str):
@@ -59,7 +66,7 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks, notebook
             log_result.append(notebook + " - Success")
         except Exception as e:
             error_ocurred = True
-            error_message = str(e)
+            error_message = strip_ansi(str(e))
 
             #For debugging
             #print(traceback.format_exc())
