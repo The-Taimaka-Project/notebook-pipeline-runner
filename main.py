@@ -71,7 +71,7 @@ if(__name__ == '__main__'):
                  '/notebooks/09_relapse_study_updater.ipynb',
                  '/notebooks/10_attachment_updater.ipynb',
                  '/notebooks/11_itp_data_updater.ipynb',
-                 '/notebooks/12_nonresponse_baserow_updater.ipynb'
+                 '/notebooks/12_nonresponse_baserow_updater.ipynb',
                  '/notebooks/13_itphistory_updater.ipynb'
                  ] #use relative paths from main.py here, with no leading .
     min_relapse_notebooks = [
