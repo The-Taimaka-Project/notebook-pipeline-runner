@@ -37,6 +37,8 @@ if(__name__ == '__main__'):
     LOG_DIRECTORY = main_path+'/logs'
     OUTPUT_DIR = main_path+'/out'
     ERROR_HOLD = main_path+'/out/error.txt'
+    NOTEBOOK_DIR = main_path + '/notebooks/'
+
 
     #email.send_email('PIPELINE IS INITIATING',
     #                 '<strong>Pipeline began running at %s</strong>' % datetime.datetime.now())
@@ -60,27 +62,24 @@ if(__name__ == '__main__'):
               .format(ERROR_HOLD))
         exit()
 
-    all_notebooks = ['/notebooks/01_admit_updater.ipynb',
-                 '/notebooks/02_weekly_updater.ipynb',
-                 '/notebooks/03_photo_matching_updater.ipynb',
-                 '/notebooks/04_itp_arrival_updater.ipynb',
-                 '/notebooks/05_itp_discharge_updater.ipynb',
-                '/notebooks/06_biometrics_updater.ipynb',
-                '/notebooks/07_mmh_updater.ipynb',
-                 '/notebooks/08_current_crawler.ipynb',
-                 '/notebooks/09_relapse_study_updater.ipynb',
-                 '/notebooks/10_attachment_updater.ipynb',
-                 '/notebooks/11_itp_data_updater.ipynb',
-                 '/notebooks/12_nonresponse_baserow_updater.ipynb',
-                 '/notebooks/13_itphistory_updater.ipynb'
-                 ] #use relative paths from main.py here, with no leading .
     min_relapse_notebooks = [
          '/notebooks/10_attachment_updater.ipynb'
     ]
+
     if args.short_run:
         notebooks = [main_path + i for i in min_relapse_notebooks]
     else:
-        notebooks = [main_path + i for i in all_notebooks]
+        # Discover all .ipynb files that don't start with 'nonpipeline-'
+        all_ipynb_files = []
+        for filename in os.listdir(NOTEBOOK_DIR):
+            if filename.endswith('.ipynb') and not filename.startswith('nonpipeline-'):
+                all_ipynb_files.append(filename)
+        
+        # Sort alphabetically
+        all_ipynb_files.sort()
+        
+        # Create full paths
+        notebooks = [os.path.join(NOTEBOOK_DIR, filename) for filename in all_ipynb_files]
 
     if not args.bypass_confirm and not confirm_run(notebooks):
         print("Exiting...")

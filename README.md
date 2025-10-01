@@ -74,18 +74,7 @@ which contains all the dependencies needed to run the pipeline normally.
 4. Type `python3 main.py --bypass-confirm` to run the dummy pipeline to make sure everything works. Now, it's time to modify the pipeline to your liking
 now that we've verified that the pipeline works.
 
-5. To modify the pipeline, edit the `main.py` file. The `main.py` file contains the main function, which
-contains an array called `notebooks`, containing the path to each notebook that will be run
-and in what order they will be run. Modify this array to your liking.
-
-```python
-notebooks = ['./notebooks/notebook.ipynb',
-             './notebooks/notebook2.ipynb',
-             './notebooks/notebook4.ipynb',
-             './notebooks/notebookERROR.ipynb',
-             './notebooks/notebook4.ipynb'
-             ]
-```
+5. By default, main.py will auto-detect .ipynb files in the notebooks directory that do not start with 'nonpipeline-', alphabetize these, and run them. With arguments, you can only run a specific set of files instead. See main.py for details.
 
 ## To Run as CRON Job
 
