@@ -83,7 +83,7 @@ def run_pipeline(log_directory, output_dir, error_hold_path, notebooks, notebook
                              "Halting pipeline execution. Please check the logs.")
 
             send_email("ERROR RUNNING PIPELINE",
-                       f"<strong>Error running notebook</strong><br><p>{error_message}</p>")
+                       f"<strong>Error running notebook - {notebook}</strong><br><p>{error_message}</p>")
             break
 
         index += 1
