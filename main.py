@@ -63,7 +63,7 @@ if(__name__ == '__main__'):
         exit()
 
     min_relapse_notebooks = [
-         '/notebooks/14_attachment_updater.ipynb'
+         '/notebooks/08_attachment_updater.ipynb'
     ]
 
     if args.short_run:
